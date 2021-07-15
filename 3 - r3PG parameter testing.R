@@ -38,15 +38,14 @@ for (sifile in sifiles) {
   
   # EXTRACT PARAMETER SETS (WITH PSET ID) AND TRANSPOSE FOR INPUT INTO R3PG ONE AT A TIME
   
-  for (pset in 1:dim(par_combinations)[1]) {
+  for (pset in 1:dim(par_combination)[1]) {
     
-    pset_id <- par_combinations[pset, 1]   # ID of parameter set
+    pset_id <- par_combination[pset, 1]   # ID of parameter set
+
+    iparameters <- tibble(colnames(par_combination)[-1],
+                          as.vector(t(par_combination[pset, -1])))
     
-    iparameters_new <- tibble('parameter' = colnames(par_combinations)[-1],
-                          'Eucalyptus grandis x urophylla' = as.vector(t(par_combinations[pset, -1])))
-    
-    iparameters <- iparameters_new
-    
+    colnames(iparameters) <- c('parameter', ispecies$species)
     
     
     r3PG_output <- check_and_run_r3PG_inputs(isite, ispecies, iclimate, iparameters)
