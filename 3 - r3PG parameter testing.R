@@ -60,21 +60,15 @@ for (sifile in sifiles) {
     
     
     
-    
-    
-    
-    
     ## DISCARD OUTPUT VARIABLES NOT OF INTEREST
     
-    keepv <- rep(F, dim(r3PG_output)[1])
+    r3PG_output <- r3PG_output[r3PG_output$variable %in% oput, ]
     
-    for (ov in oput) {
-      
-      keepv <- keepv + c(r3PG_output$variable == ov)
-      
-    }
     
-    r3PG_output <- r3PG_output[keepv > 0, ]
+    
+    
+    
+    
     
     
     
