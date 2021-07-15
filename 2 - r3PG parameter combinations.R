@@ -34,24 +34,34 @@ test_par_comb$Parameter_set <- paste0('pset', 1:num_par_comb)
 
 ## CREATE SETS OF PARAMETER COMBINATIONS
 
-block_size <- num_par_comb / num_test_val
 
-block_num <- 3
+# calculate number of consecutive duplicate values in each 'block' for the first parameter
 
-for (par in 1:num_test_par) {
+block_size <- num_par_comb / num_test_val  
 
+
+for (par in 1:num_test_par) {  # set up combinations by column (one parameter per column)
+
+  
+  # calculate number of repeated sets of 'blocks' in column (each set includes a block for each test value)
+  
+  block_rep <- num_par_comb / (block_size * num_test_val)
+
+  
+  # generate blocks of low, medium, and high values for parameter in column
+  
   Low <- test_par[par, 2]
   Med <- test_par[par, 3]
   High <- test_par[par, 4]
   
   test_par_comb[,par+1] <- rep(c(rep(Low, block_size),
                                  rep(Med, block_size),
-                                 rep(High, block_size)), block_num/num_test_val)
+                                 rep(High, block_size)), block_rep)
   
+  
+  # calculate size of blocks in next column
   
   block_size <- block_size / num_test_val
-  
-  block_num <- num_par_comb / block_size 
   
 }
 
