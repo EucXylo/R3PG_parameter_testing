@@ -74,9 +74,11 @@ if (!all(sifiles %in% paste0(act_val[,1], '.xlsx'))) stop("Not all files in 'inp
 
 # Check that selected output variables are all represented by numeric values in actual_data.csv
 
-if (!all(oput %in% tolower(colnames(act_val[,-1])))) stop("Not all r3PG outputs listed in 'RUN' script are present in 'input actual/actual_data.csv'.")
+colnames(act_val) <- tolower(colnames(act_val))
 
-sel_data <- act_val[, match(oput, tolower(colnames(act_val)))]
+if (!all(oput %in% colnames(act_val[,-1]))) stop("Not all r3PG outputs listed in 'RUN' script are present in 'input actual/actual_data.csv'.")
+
+sel_data <- act_val[, match(oput, colnames(act_val))]
 
 if (anyNA(sel_data)) stop("Missing data in 'input actual/actual_data.csv' for r3PG output variables listed in 'RUN' script.")
 
