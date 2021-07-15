@@ -8,16 +8,6 @@
 
 
 
-## LIBRARIES
-
-
-
-
-## TIMESTAMP FOR OUTPUTS
-
-tstamp <- format(Sys.time(), '%y%m%d%H%M')
-
-
 
 ## GET BASE AND TESTING PARAMETERS
 

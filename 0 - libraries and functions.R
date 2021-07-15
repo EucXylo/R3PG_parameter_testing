@@ -15,6 +15,12 @@
 if (!require('r3PG')) install.packages('r3PG', dependencies = TRUE)  
 library(r3PG)
 
+if (!require('tidyverse')) install.packages('tidyverse', dependencies = TRUE)  
+library(tidyverse)
+
+if (!require('readxl')) install.packages('readxl', dependencies = TRUE)  
+library(readxl)
+
 
 
 
