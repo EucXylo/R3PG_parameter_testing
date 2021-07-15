@@ -8,21 +8,6 @@
 
 
 
-## LIBRARIES
-
-library(r3PG)
-
-library(tidyverse)
-
-library(readxl)
-
-
-
-## TIMESTAMP FOR OUTPUTS
-
-#tstamp <- format(Sys.time(), '%y%m%d%H%M')
-
-
 
 ## DEFINE OUTPUTS TO EXTRACT
 
