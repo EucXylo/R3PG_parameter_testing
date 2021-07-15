@@ -12,7 +12,7 @@
 
 ofilename <- paste0('output sim/', tstamp, '_par_test_r3PG_output.csv')
 
-oheaders <- c('parameter set', 'site', 'date', 'species', 'group', 'variable', 'value')
+oheaders <- c('parameter set', 'site', 'date', 'species', 'group', 'variable', 'predicted', 'actual')
 
 write.table(t(oheaders), file = ofilename, row.names=F, col.names=F, sep=',')
 
@@ -71,10 +71,15 @@ for (sifile in sifiles) {
     
     
     
+    ## MATCH PREDICTED AND ACTUAL VALUES FOR SITE
+    
+    site_act_val <- unlist(act_val[match(site_id, act_val[,1]), 
+                                   match(r3PG_output$variable, colnames(act_val))])
+    
+    r3PG_output <- cbind(r3PG_output, site_act_val)
     
     
-    
-    
+    colnames(r3PG_output) <- oheaders
     
     
     ## OUTPUT CSV RESULTS WITH PSET AND SITE INFO (APPENDED TO OUTPUT FILE)
