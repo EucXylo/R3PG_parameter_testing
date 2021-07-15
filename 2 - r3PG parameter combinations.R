@@ -9,14 +9,6 @@
 
 
 
-## GET BASE AND TESTING PARAMETERS
-
-base_par <- read.csv('Input parameters/base_parameter_values.csv')
-
-test_par <- read.csv('Input parameters/test_parameter_values.csv')
-
-
-
 ## CREATE A LONG DATAFRAME FOR THE COMBINATION OF TEST PARAMETERS
 
 num_test_par <- dim(test_par)[1]  # number of rows = number of parameters being varied
