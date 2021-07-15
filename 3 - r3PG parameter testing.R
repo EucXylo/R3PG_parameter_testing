@@ -33,20 +33,7 @@ for (sifile in sifiles) {
   isite <- read_xlsx(sifilepath, 'site')
   ispecies <- read_xlsx(sifilepath, 'species')
   iclimate <- read_xlsx(sifilepath, 'climate')
-  
-  
-  #iparameters_old <- read_xlsx(sifilepath, 'parameters')
 
-  
-  
-  ## GET SPECIES AND TIME RANGE INFORMATION FROM DATA
-  
-  ispeciesname <- ispecies$species[1]  # NB: this assumes one species per input dataset!
-  
-  iclimatestart <- isite$from[1]
-    
-  iclimateend <- isite$to[1]
-  
   
   
   # EXTRACT PARAMETER SETS (WITH PSET ID) AND TRANSPOSE FOR INPUT INTO R3PG ONE AT A TIME
@@ -61,38 +48,17 @@ for (sifile in sifiles) {
     iparameters <- iparameters_new
     
     
-    ## PREPARE INPUT DATA
     
-    # NNB: must assign results of 'prepare...' function(s) to use prepared input in model!?
+    r3PG_output <- check_and_run_r3PG_inputs(isite, ispecies, iclimate, iparameters)
     
-    
-    # is 'prepare_climate' redundant ('prepare_input' does the same job?)?
-    iclimate <- prepare_climate( climate = iclimate, from = iclimatestart, to = iclimateend)
-    
-    # is 'prepare_parameters' redundant ('prepare_input' does the same job?)?
-    iparameters <- prepare_parameters( parameters = iparameters, sp_names = ispeciesname)
-    
-    inputlist <- prepare_input(site = isite,
-                               species = ispecies,
-                               climate = iclimate,
-                               parameters = iparameters,
-                               thinning = NULL,
-                               size_dist = NULL)
+
     
     
     
-    ## RUN MODEL
     
-    r3PG_output <- run_3PG(
-      site        = inputlist$site,
-      species     = inputlist$species,
-      climate     = inputlist$climate,
-      thinning    = NULL,
-      parameters  = inputlist$parameters,
-      size_dist   = NULL,
-      settings    = list(light_model = 1, transp_model = 1, phys_model = 1,
-                         height_model = 1, correct_bias = 0, calculate_d13c = 0),
-      check_input = TRUE, df_out = TRUE)
+    
+    
+    
     
     
     
