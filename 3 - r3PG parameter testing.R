@@ -27,7 +27,7 @@ for (sifile in sifiles) {
   
   ## GET INPUT DATA FROM FILE
   
-  sifilepath <- paste0('Input sites/', sifile) # add relative file path
+  sifilepath <- paste0('input sites/', sifile)
   
   isite <- read_xlsx(sifilepath, 'site')
   ispecies <- read_xlsx(sifilepath, 'species')
