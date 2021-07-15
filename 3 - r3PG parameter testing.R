@@ -15,22 +15,6 @@ oput <- c('basal_area', 'dbh', 'height', 'volume')  # outputs must match names o
 
 
 
-## GET PARAMETER COMBINATIONS TO BE TESTED - CHECK THAT ONLY ONE FILE OF COMBINATIONS EXISTS
-
-pfiles <- list.files('Input parameters')  # get file names from input folder
-
-
-is_par_comb <- grepl('_par_combination.csv$', pfiles)  # identify parameter combinations
-
-if (sum(is_par_comb) > 1) warning("More than one parameter combination file present!")
-
-if (sum(is_par_comb) < 1) warning("Parameter combination file not present!")
-
-
-par_combinations <- read.csv(paste0('Input parameters/', pfiles[is_par_comb]))
-
-
-
 ## CREATE FILE TO HOLD OUTPUTS
 
 ofilename <- paste0('Output sim/', 
