@@ -82,8 +82,7 @@ par_combination[match_pars+1] <- test_par_comb[,-1]
 
 ## OUTPUT TIMESTAMPED CSV RESULTS
 
-ofilename <- paste0('Input parameters/', tstamp, '_par_combination.csv')
-
+ofilename <- paste0('output psets/', tstamp, '_par_combination.csv')
 
 write.csv(par_combination, file = ofilename, row.names=F)
 

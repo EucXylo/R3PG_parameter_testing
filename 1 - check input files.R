@@ -41,3 +41,14 @@ if (any(duplicated(test_par$parameter))) stop("Duplicate parameters in 'Input pa
 if (!all(test_par$parameter %in% base_par$parameter)) stop("Not all parameters in 'Input parameters/test_parameter_values.csv' present in 'Input parameters/base_parameter_values.csv'.")
 
 
+
+
+
+
+## CREATE OUTPUT FOLDERS IF THEY DON'T ALREADY EXIST
+
+if (!dir.exists('output psets')) dir.create('output psets')
+
+
+
+
