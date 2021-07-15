@@ -19,24 +19,6 @@ write.table(t(oheaders), file = ofilename, row.names=F, col.names=F, sep=',')
 
 
 
-
-
-## GET LIST OF SITE INPUT FILES AND IGNORE NON-XLSX FORMAT FILES
-
-sifiles <- list.files('Input sites')  # get file names from input folder
-
-
-ixlsx <- grepl("xlsx$", sifiles, ignore.case=T)  # check if input files end with xlsx
-
-if (any(!ixlsx)) warning("Not all files in 'input' were xlsx format - some files ignored.")
-
-sifiles <- sifiles[ixlsx]  # discard any non-xlsx files
-
-
-warning("If any of the Excel input data files are open, they will cause an error!")
-
-
-
 ## LOOP THROUGH EACH INPUT FILE TO GENERATE R3PG OUTPUT
 
 for (sifile in sifiles) {
