@@ -52,8 +52,11 @@ for (sifile in sifiles) {
     
 
     
+    ## DISCARD ALL VALUES EXCEPT LAST IN TIME-SERIES
     
+    last_day <- max(r3PG_output$date)
     
+    r3PG_output <- r3PG_output[r3PG_output$date == last_day, ]
     
     
     
