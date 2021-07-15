@@ -10,8 +10,7 @@
 
 ## CREATE FILE TO HOLD OUTPUTS ALONG WITH ACTUAL DATA
 
-ofilename <- paste0('Output sim/', 
-                    sub('combination.csv$', 'test_r3PG_output.csv', pfiles[is_par_comb]))
+ofilename <- paste0('output sim/', tstamp, '_par_test_r3PG_output.csv')
 
 oheaders <- c('parameter set', 'site', 'date', 'species', 'group', 'variable', 'value')
 
