@@ -69,13 +69,17 @@ for (par in 1:num_test_par) {  # set up combinations by column (one parameter pe
 
 ## COMBINE COMBINATIONS OF TEST PARAMETERS AND BASE PARAMETERS
 
+# duplicate base parameter values for each parameter set
+
 par_combination <- data.frame(matrix(data = base_par[,2], ncol=dim(base_par)[1], nrow=num_par_comb, 
                                      byrow=T))
-
 
 par_combination <- cbind(test_par_comb[,1], par_combination)
 
 colnames(par_combination) <- c('Parameter_set', base_par[,1])
+
+
+# identify parameters with varied test values, and over-write base values with appropriate test values
 
 match_pars <- match(test_par[,1], base_par[,1])
 
