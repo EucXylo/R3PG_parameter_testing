@@ -11,9 +11,9 @@
 
 ## GET BASE AND TESTING PARAMETERS
 
-base_par <- read.csv('Input parameters/base parameter values.csv')
+base_par <- read.csv('Input parameters/base_parameter_values.csv')
 
-test_par <- read.csv('Input parameters/test parameter values.csv')
+test_par <- read.csv('Input parameters/test_parameter_values.csv')
 
 
 
