@@ -8,6 +8,12 @@
 
 
 
+## DEFINE OUTPUTS TO EXTRACT
+
+oput <- c('basal_area', 'dbh', 'height', 'volume')  # outputs must match names of r3PG outputs
+
+
+
 ## TIMESTAMP FOR OUTPUTS
 
 tstamp <- format(Sys.time(), '%y%m%d%H%M')

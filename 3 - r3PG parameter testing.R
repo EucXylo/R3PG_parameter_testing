@@ -8,14 +8,7 @@
 
 
 
-
-## DEFINE OUTPUTS TO EXTRACT
-
-oput <- c('basal_area', 'dbh', 'height', 'volume')  # outputs must match names of r3PG outputs
-
-
-
-## CREATE FILE TO HOLD OUTPUTS
+## CREATE FILE TO HOLD OUTPUTS ALONG WITH ACTUAL DATA
 
 ofilename <- paste0('Output sim/', 
                     sub('combination.csv$', 'test_r3PG_output.csv', pfiles[is_par_comb]))
