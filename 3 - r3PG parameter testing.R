@@ -66,18 +66,16 @@ for (sifile in sifiles) {
     
     
     
-    
-    
-    
-    
-    
-    
     ## ADD PARAMETER SET AND SITE INFO TO MODEL OUTPUT
-    
-    r3PG_output <- cbind(rep(pset_id, dim(r3PG_output)[1]),
-                         rep(site_id, dim(r3PG_output)[1]),
-                         r3PG_output)
 
+    r3PG_output <- cbind(pset_id, site_id, r3PG_output)
+    
+    
+    
+    
+    
+    
+    
     
     
     ## OUTPUT CSV RESULTS WITH PSET AND SITE INFO (APPENDED TO OUTPUT FILE)
