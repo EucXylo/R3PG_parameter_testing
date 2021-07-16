@@ -20,6 +20,8 @@ base_par <- read.csv('Input parameters/base_parameter_values.csv')
 
 test_par <- read.csv('Input parameters/test_parameter_values.csv')
 
+colnames(base_par)[1] <- "parameter"
+
 
 # confirm both base_par and test_par have 'parameter' as first column
 
