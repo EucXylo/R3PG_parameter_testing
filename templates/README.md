@@ -1,12 +1,11 @@
-# ArcGIS_r3PG_loop template files
+# R3PG_parameter_testing template files
 
-Place these template files in the following subfolders in the folder that holds the ArcGIS_r3PG_loop scripts:
+Please ensure the following subfolders and files are present in the folder that holds the R3PG_parameter_testing scripts:
 
-* 'input_file_combinations.csv' in subfolder 'input all' (do not rename)
+* 'actual_data.csv' in subfolder 'input actual' (do not rename)
 
-* 'r3PG_template.xlsx' in subfolder 'input r3pg template' (do not rename)
+* 'base_parameter_values.csv' and 'test_parameter_values.csv' in subfolder 'input parameters' (do not rename)
 
-* 'input_co2_scenario' in subfolder 'input co2' (rename to match entries in 'CO2 file' column in 'input_file_combinations.csv')
+* '[SiteName].xlsx' in subfolder 'input sites' ([SiteName] must match site names listed in 'actual_data.csv')
 
-* 'input_site_ArcGIS_data.csv' in subfolder 'input arcgis' (rename to match entries in 'ArcGIS file' column in 'input_file_combinations.csv')
 
