@@ -90,6 +90,8 @@ if (!all(is.numeric(unlist(sel_data)))) stop("Expected only numeric values in 'i
 
 if (!dir.exists('output psets')) dir.create('output psets')
 
+if (!dir.exists('output sim')) dir.create('output sim')
+
 if (!dir.exists('output compare')) dir.create('output compare')
 
 
