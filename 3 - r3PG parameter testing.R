@@ -87,9 +87,14 @@ for (sifile in sifiles) {
     write.table(r3PG_output, file = ofilename, row.names=F, col.names=F, append=T, sep=',')
   
     
+    print(paste(site_id, pset_id))
+    
     
   }
   
+  print(paste(rep('-', nchar(site_id) + 10), collapse = ''))
+  print(paste('Completed', site_id))
+  print(paste(rep('-', nchar(site_id) + 10), collapse = ''))
   
 }
 
