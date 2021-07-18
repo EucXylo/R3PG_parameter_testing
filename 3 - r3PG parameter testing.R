@@ -83,7 +83,7 @@ for (sifile in sifiles) {
   
   # EXTRACT PARAMETER SETS (WITH PSET ID) AND TRANSPOSE FOR INPUT INTO R3PG ONE AT A TIME
   
-  for (pset in 1:dim(par_combination)[1]) {
+  for (pset in 1:num_par_comb) {
     
     pset_id <- par_combination[pset, 1]   # ID of parameter set
 
