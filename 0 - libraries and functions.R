@@ -78,6 +78,28 @@ check_and_run_r3PG_inputs <- function(isite, ispecies, iclimate, iparameters) {
 }
 
 
+# Check date (YYYY-mm) is before/after a given year and month
+
+check_dates <- function(target_date, test, compare_year, compare_month) {
+  
+  target_date <- as.Date(paste0(target_date, '-01'), '%Y-%m-%d')
+  
+  if (nchar(compare_month) == 1) compare_month <- paste0('0', compare_month)
+  
+  compare_date <- as.Date(paste0(compare_year, '-', compare_month, '-01'), '%Y-%m-%d')
+  
+  if (test == '>=') {
+    
+    return(target_date >= compare_date)
+    
+  } else if (test == '<=') {
+    
+    return(target_date <= compare_date)
+    
+  } else stop("Incorrect argument passed to 'check_dates' function.")
+  
+}
+
 
 # SEE https://heuristically.wordpress.com/2013/07/12/calculate-rmse-and-mae-in-r-and-sas/
 

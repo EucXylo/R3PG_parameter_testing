@@ -31,8 +31,47 @@ for (sifile in sifiles) {
   
   isite <- read_xlsx(sifilepath, 'site')
   ispecies <- read_xlsx(sifilepath, 'species')
-  iclimate <- read_xlsx(sifilepath, 'climate')
+  iclimate <- read_xlsx(sifilepath, 'climate')  
+  
+  
+  ## OVERWRITE CLIMATE DATA IN 'SITE' FILES WITH ANY SUBSTITUTE WEATHER DATA FROM 'INPUT WEATHER' FOLDER
+  
+  if (length(all_weather_vars) > 0) {
+    
+    weather_data <- merge(iclimate[, c('year', 'month')], 
+                          subst_weather[subst_weather$site == site_id, ], 
+                          by = c('year', 'month'), sort = FALSE, all.x = TRUE)
+    
+    msg <- paste0(paste0("Period covered by 'input weather' doesn't include start date from 'site' sheet in 'input sites/", sifile, "'."))
+    if (!check_dates(isite$from, '>=', subst_weather$year[1], subst_weather$month[1])) stop(msg)
+    
+    msg <- paste0(paste0("Period covered by 'input weather' doesn't include end date from 'site' sheet in 'input sites/", sifile, "'."))
+    if (!check_dates(isite$to, '<=', tail(subst_weather$year, 1), tail(subst_weather$month, 1))) stop(msg)
+    
+    
+    # replace old weather data with substitute data
+    
+    for (v in all_weather_vars) {
 
+      old_var <- match(v, colnames(iclimate))
+      
+      msg <- paste0("File 'input weather/", v, ".csv' doesn't have corresponding variable in the 'climate' sheet of 'input sites/", sifile, "'.")
+      if (anyNA(old_var)) stop(msg)
+      
+      subst_var <- match(v, colnames(weather_data))
+      
+      iclimate[, old_var] <- NA # make sure old values are removed
+      
+      iclimate[, old_var] <- weather_data[, subst_var]
+      
+    }
+    
+    # discard rows with missing data
+    
+    iclimate <- iclimate[!is.na(rowSums(iclimate[, all_weather_vars])), ]
+    
+  }
+  
   
   
   # EXTRACT PARAMETER SETS (WITH PSET ID) AND TRANSPOSE FOR INPUT INTO R3PG ONE AT A TIME
