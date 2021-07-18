@@ -55,14 +55,17 @@ sifiles <- list.files('input sites')  # get file names from input folder
 msg <- "Not all files in 'input sites' are xlsx format."
 if (any(!grepl("xlsx$", sifiles, ignore.case=T))) stop(msg)
 
+input_sites <- sub(".xlsx$", '', sifiles, ignore.case=T)
 
 
-## CHECK INPUT WEATHER FILES
+
+## GET AND  CHECK INPUT WEATHER FILES
 
 all_weather_vars <- list.files('input weather')  # get file names from input folder
 
 msg <- "Not all files in 'input weather' are csv format."
 if (any(!grepl("csv$", all_weather_vars, ignore.case=T))) stop(msg)
+
 
 all_weather_vars <- sub('.csv$', '', all_weather_vars, ignore.case = T)
 
@@ -70,11 +73,47 @@ for (w in all_weather_vars) {
   
   weather_var <- read.csv(paste0('input weather/', w, '.csv'))
   
+  colnames(weather_var)[1] <- 'site'
+  
   msg <- paste0("Not all sites in 'input sites' are represented in the first column of 'input weather/", w, ".csv'.")
-  if (!all(sifiles %in% paste0(weather_var[,1], '.xlsx'))) stop(msg)
+  if (!all(sifiles %in% paste0(weather_var$site, '.xlsx'))) stop(msg)
+  
+  weather_var <- weather_var[weather_var$site %in% input_sites, ]
   
   msg <- paste0("Expected columns are missing in 'input weather/", w, ".csv' (need 'year', 'month', and variable name.")
   if (!all(c('year', 'month', w) %in% colnames(weather_var))) stop(msg)
+  
+  
+  # Create dataframe to hold substitute weather variables from 'input weather' folder
+  
+  if (!exists('subst_weather')) {
+  
+    subst_weather <- weather_var[, c('site', 'year', 'month')]
+    
+    subst_weather <- cbind(subst_weather, weather_var[, match(w, colnames(weather_var))])
+    
+    colnames(subst_weather)[dim(subst_weather)[2]] <- w
+    
+    subst_weather <- subst_weather[order(subst_weather$site, 
+                                         subst_weather$year, 
+                                         subst_weather$month), ]
+    
+  } else {
+    
+    weather_var <- weather_var[order(weather_var$site, 
+                                     weather_var$year, 
+                                     weather_var$month), ]
+    
+    msg <- "Files in 'input weather' do not contain matching date ranges."
+    if (!all(c(weather_var$year, weather_var$month) == c(subst_weather$year, subst_weather$month))) stop(msg)
+    
+    subst_weather <- cbind(subst_weather, weather_var[, match(w, colnames(weather_var))])
+    
+    colnames(subst_weather)[dim(subst_weather)[2]] <- w
+    
+    
+  }
+  
   
 }
 
