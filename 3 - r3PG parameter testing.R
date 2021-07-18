@@ -96,6 +96,12 @@ for (sifile in sifiles) {
     r3PG_output <- check_and_run_r3PG_inputs(isite, ispecies, iclimate, iparameters)
     
 
+
+    ## DISCARD OUTPUT VARIABLES NOT OF INTEREST
+    
+    r3PG_output <- r3PG_output[r3PG_output$variable %in% oput, ]
+    
+    
     
     ## DISCARD ALL VALUES EXCEPT LAST IN TIME-SERIES
     
@@ -103,11 +109,6 @@ for (sifile in sifiles) {
     
     r3PG_output <- r3PG_output[r3PG_output$date == last_day, ]
     
-    
-    
-    ## DISCARD OUTPUT VARIABLES NOT OF INTEREST
-    
-    r3PG_output <- r3PG_output[r3PG_output$variable %in% oput, ]
     
     
     
