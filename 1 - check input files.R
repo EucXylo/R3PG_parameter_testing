@@ -48,12 +48,10 @@ if (!all(test_par$parameter %in% base_par$parameter)) stop("Not all parameters i
 
 sifiles <- list.files('input sites')  # get file names from input folder
 
+if (any(!grepl("xlsx$", sifiles, ignore.case=T))) stop("Not all files in 'input sites' are xlsx format.")
 
-ixlsx <- grepl("xlsx$", sifiles, ignore.case=T)  # check if input files end with xlsx
 
-if (any(!ixlsx)) warning("Not all files in 'input sites' were xlsx format - some files ignored.")
 
-sifiles <- sifiles[ixlsx]  # discard any non-xlsx files
 
 
 
