@@ -73,6 +73,13 @@ for (sifile in sifiles) {
   }
   
   
+  ## OUTPUT CLIMATE DATA USED IN SITE SIMULATION FOR RECORD
+  
+  ofilename <- paste0('output trace/', tstamp, '_', site_id, '_climate.csv')
+  
+  write.csv(iclimate, file = ofilename, row.names=F)
+  
+  
   
   # EXTRACT PARAMETER SETS (WITH PSET ID) AND TRANSPOSE FOR INPUT INTO R3PG ONE AT A TIME
   
@@ -122,6 +129,8 @@ for (sifile in sifiles) {
     
     
     ## OUTPUT CSV RESULTS WITH PSET AND SITE INFO (APPENDED TO OUTPUT FILE)
+    
+    ofilename <- paste0('output sim/', tstamp, '_par_test_r3PG_output.csv')
     
     write.table(r3PG_output, file = ofilename, row.names=F, col.names=F, append=T, sep=',')
   
