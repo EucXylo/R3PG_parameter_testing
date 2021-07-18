@@ -57,11 +57,29 @@ if (any(!grepl("xlsx$", sifiles, ignore.case=T))) stop(msg)
 
 
 
+## CHECK INPUT WEATHER FILES
+
+all_weather_vars <- list.files('input weather')  # get file names from input folder
+
+msg <- "Not all files in 'input weather' are csv format."
+if (any(!grepl("csv$", all_weather_vars, ignore.case=T))) stop(msg)
+
+all_weather_vars <- sub('.csv$', '', all_weather_vars, ignore.case = T)
+
+for (w in all_weather_vars) {
+  
+  weather_var <- read.csv(paste0('input weather/', w, '.csv'))
+  
+  msg <- paste0("Not all sites in 'input sites' are represented in the first column of 'input weather/", w, ".csv'.")
+  if (!all(sifiles %in% paste0(weather_var[,1], '.xlsx'))) stop(msg)
+  
+  msg <- paste0("Expected columns are missing in 'input weather/", w, ".csv' (need 'year', 'month', and variable name.")
+  if (!all(c('year', 'month', w) %in% colnames(weather_var))) stop(msg)
+  
+}
 
 
-
-
-
+ 
 ## GET ACTUAL DATA FOR SITES 
 
 act_val <- read.csv('input actual/actual_data.csv')
