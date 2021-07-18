@@ -25,22 +25,26 @@ colnames(base_par)[1] <- "parameter"
 
 # confirm both base_par and test_par have 'parameter' as first column
 
+msg <- "'Input parameters/base_parameter_values.csv' must begin with 'parameter' column."
+if (colnames(base_par)[1] != 'parameter') stop(msg)
 
-if (colnames(base_par)[1] != 'parameter') stop("'Input parameters/base_parameter_values.csv' must begin with 'parameter' column.")
-
-if (colnames(test_par)[1] != 'parameter') stop("'Input parameters/test_parameter_values.csv' must begin with 'parameter' column.")
+msg <- "'Input parameters/test_parameter_values.csv' must begin with 'parameter' column."
+if (colnames(test_par)[1] != 'parameter') stop(msg)
 
 
 # check for duplicate parameter names
 
-if (any(duplicated(base_par$parameter))) stop("Duplicate parameters in 'Input parameters/base_parameter_values.csv'.")
+msg <- "Duplicate parameters in 'Input parameters/base_parameter_values.csv'."
+if (any(duplicated(base_par$parameter))) stop(msg)
 
-if (any(duplicated(test_par$parameter))) stop("Duplicate parameters in 'Input parameters/test_parameter_values.csv'.")
+msg <- "Duplicate parameters in 'Input parameters/test_parameter_values.csv'."
+if (any(duplicated(test_par$parameter))) stop(msg)
 
 
 # confirm that all test parameters are present in base_parameter_values.csv
 
-if (!all(test_par$parameter %in% base_par$parameter)) stop("Not all parameters in 'Input parameters/test_parameter_values.csv' present in 'Input parameters/base_parameter_values.csv'.")
+msg <- "Not all parameters in 'Input parameters/test_parameter_values.csv' present in 'Input parameters/base_parameter_values.csv'."
+if (!all(test_par$parameter %in% base_par$parameter)) stop(msg)
 
 
 
@@ -48,7 +52,10 @@ if (!all(test_par$parameter %in% base_par$parameter)) stop("Not all parameters i
 
 sifiles <- list.files('input sites')  # get file names from input folder
 
-if (any(!grepl("xlsx$", sifiles, ignore.case=T))) stop("Not all files in 'input sites' are xlsx format.")
+msg <- "Not all files in 'input sites' are xlsx format."
+if (any(!grepl("xlsx$", sifiles, ignore.case=T))) stop(msg)
+
+
 
 
 
@@ -62,27 +69,33 @@ act_val <- read.csv('input actual/actual_data.csv')
 
 # Check for duplicate sites
 
-if (any(duplicated(act_val[,1]))) stop("Duplicate values in first column of 'input actual/actual_data.csv'.")
+msg <- "Duplicate values in first column of 'input actual/actual_data.csv'."
+if (any(duplicated(act_val[,1]))) stop(msg)
 
 
 # Check that all sites in actual_data.csv are represented in 'input sites' subfolder and vice versa
 
-if (!all(paste0(act_val[,1], '.xlsx') %in% sifiles)) warning("Not all sites in 'input actual/actual_data.csv' are represented in 'input sites'.")
+msg <- "Not all sites in 'input actual/actual_data.csv' are represented in 'input sites'."
+if (!all(paste0(act_val[,1], '.xlsx') %in% sifiles)) warning(msg)
 
-if (!all(sifiles %in% paste0(act_val[,1], '.xlsx'))) stop("Not all files in 'input sites' subfolder are represented as sites in 'input actual/actual_data.csv'.")
+msg <- "Not all files in 'input sites' subfolder are represented as sites in 'input actual/actual_data.csv'."
+if (!all(sifiles %in% paste0(act_val[,1], '.xlsx'))) stop(msg)
 
 
 # Check that selected output variables are all represented by numeric values in actual_data.csv
 
 colnames(act_val) <- tolower(colnames(act_val))
 
-if (!all(oput %in% colnames(act_val[,-1]))) stop("Not all r3PG outputs listed in 'RUN' script are present in 'input actual/actual_data.csv'.")
+msg <- "Not all r3PG outputs listed in 'RUN' script are present in 'input actual/actual_data.csv'."
+if (!all(oput %in% colnames(act_val[,-1]))) stop(msg)
 
 sel_data <- act_val[, match(oput, colnames(act_val))]
 
-if (anyNA(sel_data)) stop("Missing data in 'input actual/actual_data.csv' for r3PG output variables listed in 'RUN' script.")
+msg <- "Missing data in 'input actual/actual_data.csv' for r3PG output variables listed in 'RUN' script."
+if (anyNA(sel_data)) stop(msg)
 
-if (!all(is.numeric(unlist(sel_data)))) stop("Expected only numeric values in 'input actual/actual_data.csv' for r3PG output variables listed in 'RUN' script.")
+msg <- "Expected only numeric values in 'input actual/actual_data.csv' for r3PG output variables listed in 'RUN' script."
+if (!all(is.numeric(unlist(sel_data)))) stop(msg)
 
 
 
