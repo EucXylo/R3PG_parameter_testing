@@ -14,19 +14,19 @@ warning("All input files must be closed, or this process will fail.")
 
 
 
-## GET BASE AND TESTING PARAMETERS
+## GET AND CHECK BASE AND TESTING PARAMETERS
 
 base_par <- read.csv('Input parameters/base_parameter_values.csv')
 
 test_par <- read.csv('Input parameters/test_parameter_values.csv')
 
-colnames(base_par)[1] <- "parameter"
+colnames(base_par)[1] <- "parameter"  # solving problem with formatting
 
 
 # confirm both base_par and test_par have 'parameter' as first column
 
-msg <- "'Input parameters/base_parameter_values.csv' must begin with 'parameter' column."
-if (colnames(base_par)[1] != 'parameter') stop(msg)
+# msg <- "'Input parameters/base_parameter_values.csv' must begin with 'parameter' column."
+# if (colnames(base_par)[1] != 'parameter') stop(msg)
 
 msg <- "'Input parameters/test_parameter_values.csv' must begin with 'parameter' column."
 if (colnames(test_par)[1] != 'parameter') stop(msg)
@@ -41,9 +41,9 @@ msg <- "Duplicate parameters in 'Input parameters/test_parameter_values.csv'."
 if (any(duplicated(test_par$parameter))) stop(msg)
 
 
-# confirm that all test parameters are present in base_parameter_values.csv
+# confirm that all test parameters are present in first column of base_parameter_values.csv
 
-msg <- "Not all parameters in 'Input parameters/test_parameter_values.csv' present in 'Input parameters/base_parameter_values.csv'."
+msg <- "Not all parameters in 'Input parameters/test_parameter_values.csv' present in first column of 'Input parameters/base_parameter_values.csv'."
 if (!all(test_par$parameter %in% base_par$parameter)) stop(msg)
 
 
