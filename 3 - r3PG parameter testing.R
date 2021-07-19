@@ -103,12 +103,15 @@ for (sifile in sifiles) {
     
     
     
-    ## DISCARD ALL VALUES EXCEPT LAST IN TIME-SERIES
+    ## DISCARD ALL VALUES EXCEPT THOSE WITH MATCHING ACTUAL DATA (IN TREES OVER 3YO)
     
-    last_day <- max(r3PG_output$date)
+    site_act_val <- act_val[act_val[,1] == site_id, ]
     
-    r3PG_output <- r3PG_output[r3PG_output$date == last_day, ]
+    site_act_val <- site_act_val[site_act_val$age > 3, ]
     
+    site_act_val$end_month <- as.Date(paste(site_act_val$year, site_act_val$month + 1, '01', sep = '-'), format = '%Y-%m-%d') - 1
+    
+    r3PG_output <- r3PG_output[r3PG_output$date %in% site_act_val$end_month, ]
     
     
     
@@ -120,13 +123,17 @@ for (sifile in sifiles) {
     
     ## MATCH PREDICTED AND ACTUAL VALUES FOR SITE
     
-    site_act_val <- unlist(act_val[match(site_id, act_val[,1]), 
-                                   match(r3PG_output$variable, colnames(act_val))])
+    r3PG_output <- r3PG_output[order(r3PG_output$variable, r3PG_output$date), ]
     
+    site_act_val <- site_act_val[order(site_act_val$end_month), ]
+    
+    site_act_val <- unlist(site_act_val[, sort(oput)])
+                      
     r3PG_output <- cbind(r3PG_output, site_act_val)
     
     
     colnames(r3PG_output) <- oheaders
+    
     
     
     ## OUTPUT CSV RESULTS WITH PSET AND SITE INFO (APPENDED TO OUTPUT FILE)
