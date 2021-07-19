@@ -124,12 +124,6 @@ for (w in all_weather_vars) {
 act_val <- read.csv('input actual/actual_data.csv')
 
 
-# Check for duplicate sites
-
-msg <- "Duplicate values in first column of 'input actual/actual_data.csv'."
-if (any(duplicated(act_val[,1]))) stop(msg)
-
-
 # Check that all sites in actual_data.csv are represented in 'input sites' subfolder and vice versa
 
 msg <- "Not all sites in 'input actual/actual_data.csv' are represented in 'input sites'."
