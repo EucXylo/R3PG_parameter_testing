@@ -7,22 +7,19 @@
 # This script to run different combinations of key r3PG parameters in r3PG for multiple sites and output predictions
 
 
-
-## CREATE FILE TO HOLD OUTPUTS ALONG WITH ACTUAL DATA
-
-ofilename <- paste0('output sim/', tstamp, '_par_test_r3PG_output.csv')
-
-oheaders <- c('parameter set', 'site', 'date', 'species', 'group', 'variable', 'predicted', 'actual')
-
-write.table(t(oheaders), file = ofilename, row.names=F, col.names=F, sep=',')
-
-
-
 ## LOOP THROUGH EACH INPUT FILE TO GENERATE R3PG OUTPUT
 
 for (sifile in sifiles) {
   
   site_id <- sub('.xlsx$', '', sifile)
+  
+  ## CREATE FILE TO HOLD OUTPUTS ALONG WITH ACTUAL DATA PER SITE
+  
+  ofilename <- paste0('output sim/', tstamp, '_', site_id, '_par_test_r3PG_output.csv')
+  
+  oheaders <- c('parameter set', 'site', 'date', 'species', 'group', 'variable', 'predicted', 'actual')
+  
+  write.table(t(oheaders), file = ofilename, row.names=F, col.names=F, sep=',')
   
   
   ## GET INPUT DATA FROM FILE
@@ -138,7 +135,7 @@ for (sifile in sifiles) {
     
     ## OUTPUT CSV RESULTS WITH PSET AND SITE INFO (APPENDED TO OUTPUT FILE)
     
-    ofilename <- paste0('output sim/', tstamp, '_par_test_r3PG_output.csv')
+    ofilename <- paste0('output sim/', tstamp, '_', site_id, '_par_test_r3PG_output.csv')
     
     write.table(r3PG_output, file = ofilename, row.names=F, col.names=F, append=T, sep=',')
   
