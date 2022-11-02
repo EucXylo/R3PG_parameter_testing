@@ -158,7 +158,6 @@ if (!dir.exists('output trace')) dir.create('output trace')
 
 if (!dir.exists('output sim')) dir.create('output sim')
 
-if (!dir.exists('output compare')) dir.create('output compare')
 
 
 

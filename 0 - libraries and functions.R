@@ -101,31 +101,5 @@ check_dates <- function(target_date, test, compare_year, compare_month) {
 }
 
 
-# SEE https://heuristically.wordpress.com/2013/07/12/calculate-rmse-and-mae-in-r-and-sas/
-
-
-# calculate Mean Absolute Error (MAE)
-
-calc_MAE <- function(actual, predicted) {
-  
-  error <- actual - predicted
-  
-  return(mean(abs(error)))
-  
-}
-
-
-
-# calculate Root Mean Squared Error (RMSE)
-
-calc_RMSE <- function(actual, predicted) {
-  
-  error <-actual - predicted
-  
-  return(sqrt(mean(error^2)))
-  
-}
-
-
 
 

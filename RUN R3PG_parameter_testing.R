@@ -42,8 +42,3 @@ source('2 - r3PG parameter combinations.R')
 
 source('3 - r3PG parameter testing.R')
 
-
-
-## CALCULATE MEAN ABSOLUTE ERROR (MAE) FOR ACTUAL VS PREDICTED VALUES
-
-# source('4 - r3PG predictions compare.R')
