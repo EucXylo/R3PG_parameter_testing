@@ -59,7 +59,7 @@ input_sites <- sub(".xlsx$", '', sifiles, ignore.case=T)
 
 
 
-## GET AND  CHECK INPUT WEATHER FILES
+## GET AND CHECK INPUT WEATHER FILES (optional)
 
 all_weather_vars <- list.files('input weather')  # get file names from input folder
 

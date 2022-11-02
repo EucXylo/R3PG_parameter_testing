@@ -31,7 +31,7 @@ for (sifile in sifiles) {
   iclimate <- read_xlsx(sifilepath, 'climate')  
   
   
-  ## OVERWRITE CLIMATE DATA IN 'SITE' FILES WITH ANY SUBSTITUTE WEATHER DATA FROM 'INPUT WEATHER' FOLDER
+  ## OVERWRITE CLIMATE DATA IN 'SITE' FILES WITH ANY SUBSTITUTE WEATHER DATA FROM 'INPUT WEATHER' FOLDER (optional)
   
   if (length(all_weather_vars) > 0) {
     
